@@ -66,7 +66,7 @@ This paper presents a graph-based multi-agent reinforcement learning framework f
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
               <img src="/public/icra1_1.png" alt="icra1_1" style="width:100%;max-width:800px;height:auto;border-radius:10px;object-fit:contain;margin-bottom:52px;" />
               <!-- <video autoplay loop muted preload playsinline style="width:100%;max-width:800px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
-                <source src="/video/1_final.mp4" type="video/mp4">
+                <source src="/video/1_final.mp4" type="video/mp4"> 
               </video> -->
             </el-col>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
