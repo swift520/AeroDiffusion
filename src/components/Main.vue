@@ -131,7 +131,7 @@ This paper presents a graph-based multi-agent reinforcement learning framework f
         <el-row justify="center" gutter="10">
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
               <video key='vel70' data-key='vel70' autoplay loop muted preload playsinline style="width:100%;max-width:800px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
-                <source src="/video/final1.mp4" type="video/mp4">
+                <source src="/public/video/final1.mp4" type="video/mp4">
               </video>
             </el-col>
         </el-row>
