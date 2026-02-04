@@ -28,4 +28,4 @@ coverage
 *.sw?
 yarn.lock
 
-*.mp4
+# *.mp4
