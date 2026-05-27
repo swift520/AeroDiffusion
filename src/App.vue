@@ -1,28 +1,52 @@
 <script>
-
 import Main from './components/Main.vue'
 
 export default {
   components: {
     Main,
-  }
+  },
 }
-
 </script>
 
 <template>
-    <div>
-      
-      <el-container>
-        <el-main><Main/></el-main>
-      </el-container>
-      
-      <!-- 回到顶部 -->
-      <el-backtop :right="40" :bottom="80" />
-    </div>
+  <div class="app-shell">
+    <el-container>
+      <el-main class="site-main">
+        <Main />
+      </el-main>
+    </el-container>
+
+    <el-backtop :right="32" :bottom="56" />
+  </div>
 </template>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #fbfbf8;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  color: #17201f;
+  background: #fbfbf8;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app,
+.app-shell {
+  min-height: 100vh;
+}
+
+.site-main {
+  padding: 0;
+}
 
 h1 {
   font-family: "BoldFont", Times, "MyFont", Verdana, sans-serif;
@@ -32,7 +56,11 @@ h1 {
   text-align: center;
 }
 
-h2, h3, h4, h5, h6 {
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "BoldFont", Times, Verdana, sans-serif;
   letter-spacing: 0px;
   font-size: 28px;
@@ -48,22 +76,23 @@ h2, h3, h4, h5, h6 {
   padding: 0px;
 }
 
-p, li {
-  font-family: "MyFont", Times;
-  font-size: 20px;
-  line-height: 1.75rem;
+p,
+li {
+  font-family: "MyFont", Times, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.72;
   text-align: justify;
 }
 
 .custom-button {
-  font-family: "BoldFont", "DemiFont", 'Arial', sans-serif; /* 修改字体 */
-  font-size: 16px; /* 修改字体大小 */
-  font-weight: bold; /* 修改字体粗细 */
-  color: #ffffff; /* 修改字体颜色 */
+  font-family: "BoldFont", "DemiFont", "Arial", sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
 code {
-  font-family: 'Consolas', monospace;
+  font-family: "Consolas", monospace;
   border-radius: 5px;
   padding: 2px 5px;
   background: #f2f2f2;
@@ -100,16 +129,14 @@ blockquote > p {
   margin-block-end: 0.5em;
 }
 
-/* 链接颜色装饰 */
 a {
-  color: #3273dc;
+  color: #1f6f95;
   text-decoration: none;
 }
 
-/* 鼠标焦点悬浮在链接上的颜色装饰 */
 a:hover {
-  color: #848484;
-  border-bottom: dotted;
+  color: #14544e;
+  border-bottom: 1px dotted currentColor;
 }
 
 p > img {
@@ -125,8 +152,8 @@ table {
   width: max-content;
   max-width: 100%;
   margin: 0 auto;
-  display:block;
-  overflow-x:auto;
+  display: block;
+  overflow-x: auto;
 }
 
 thead {
@@ -147,14 +174,14 @@ tbody tr:last-child {
   border-color: rgb(0 0 0);
 }
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+th,
+td {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .katex-display {
   overflow-x: auto;
   overflow-y: hidden;
 }
-
 </style>
