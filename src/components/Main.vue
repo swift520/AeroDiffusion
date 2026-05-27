@@ -1,9 +1,39 @@
 <script setup>
 
+import { nextTick, onMounted, ref, watch } from 'vue'
+
+const trajPlaybackRate = ref(1)
+const trajPlaybackMarks = {
+  0.5: '0.5x',
+  1: '1x',
+  1.5: '1.5x',
+  2: '2x',
+}
+
+function setTrajVideoPlaybackRate() {
+  const trajVideos = document.querySelectorAll("video[data-key*='traj']");
+  trajVideos.forEach(video => {
+    video.playbackRate = trajPlaybackRate.value;
+  });
+}
+
+function formatTrajPlaybackTooltip(value) {
+  return `${value}x`;
+}
+
+watch(trajPlaybackRate, () => {
+  nextTick(setTrajVideoPlaybackRate);
+});
+
+onMounted(() => {
+  setTrajVideoPlaybackRate();
+});
+
 function restarttrajVideos() {
   const trajVideos = document.querySelectorAll("video[data-key*='traj']");
   trajVideos.forEach(video => {
     video.currentTime = 0;
+    video.playbackRate = trajPlaybackRate.value;
     video.play();
   });
 }
@@ -85,17 +115,17 @@ Safe and efficient navigation in dynamic environments remains a major challenge 
     <el-row justify="center" style="margin-bottom: 56px;">
       <el-col :xs="24" :sm="22" :md="20" :lg="20" :xl="14">
         <p style="margin-bottom: 24px;">
-This section presents six representative flight demonstrations in an environment populated with dynamic obstacles. Colored cuboids denote static obstacles, while pink cylinders represent dynamic obstacles with independent motion. The quadrotor plans its motion based on onboard perception, and the colored point clouds visualize multiple feasible trajectories sampled by the diffusion model at each replanning step.
+This section presents three representative flight demonstrations in environments populated with both static and dynamic obstacles. In each row, the left video shows the quadrotor's current onboard depth observation, while the right video visualizes the map together with the multimodal candidate trajectories planned by the quadrotor. Pink obstacles represent dynamic obstacles, and the jet-colored obstacles represent static obstacles.
             </p>
         <el-row justify="center" gutter="10">
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                <video key='traj1' data-key='traj1' autoplay loop muted preload playsinline style="width:100%;max-width:800px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
-                <source src="/video/traj_vis/1.mp4" type="video/mp4">
+                <video key='traj1' data-key='traj1' autoplay loop muted preload playsinline style="width:92%;max-width:720px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
+                <source src="/video/new_depthandmap/massive2_depth.mp4" type="video/mp4">
               </video>
             </el-col>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                 <video key='traj2' data-key='traj2' autoplay loop muted preload playsinline style="width:100%;max-width:800px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
-                <source src="/video/traj_vis/2.mp4" type="video/mp4">
+                 <video key='traj2' data-key='traj2' autoplay loop muted preload playsinline style="width:92%;max-width:720px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
+                <source src="/video/new_depthandmap/massive2_map.mp4" type="video/mp4">
                </video>
             </el-col>
         </el-row>
@@ -106,13 +136,13 @@ This section presents six representative flight demonstrations in an environment
 
            <el-row justify="center" gutter="10">
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                <video key='traj3' data-key='traj3' autoplay loop muted preload playsinline style="width:100%;max-width:800px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
-                <source src="/video/traj_vis/3.mp4" type="video/mp4">
+                <video key='traj3' data-key='traj3' autoplay loop muted preload playsinline style="width:92%;max-width:720px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
+                <source src="/video/new_depthandmap/massive3_depth.mp4" type="video/mp4">
               </video>
             </el-col>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                 <video key='traj4' data-key='traj4' autoplay loop muted preload playsinline style="width:100%;max-width:800px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
-                <source src="/video/traj_vis/4.mp4" type="video/mp4">
+                 <video key='traj4' data-key='traj4' autoplay loop muted preload playsinline style="width:92%;max-width:720px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
+                <source src="/video/new_depthandmap/massive3_map.mp4" type="video/mp4">
                </video>
             </el-col>
         </el-row>     
@@ -123,21 +153,38 @@ This section presents six representative flight demonstrations in an environment
 
            <el-row justify="center" gutter="10">
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                <video key='traj5' data-key='traj5' autoplay loop muted preload playsinline style="width:100%;max-width:800px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
-                <source src="/video/traj_vis/5.mp4" type="video/mp4">
+                <video key='traj5' data-key='traj5' autoplay loop muted preload playsinline style="width:92%;max-width:720px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
+                <source src="/video/new_depthandmap/massive5_depth.mp4" type="video/mp4">
               </video>
             </el-col>
             <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                 <video key='traj6' data-key='traj6' autoplay loop muted preload playsinline style="width:100%;max-width:800px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
-                <source src="/video/traj_vis/6.mp4" type="video/mp4">
+                 <video key='traj6' data-key='traj6' autoplay loop muted preload playsinline style="width:92%;max-width:720px;aspect-ratio:16/9;border-radius:10px;object-fit:cover;" controlslist="nodownload nofullscreen noremoteplayback noaudio noplaybackrate">
+                <source src="/video/new_depthandmap/massive5_map.mp4" type="video/mp4">
                </video>
             </el-col>
         </el-row>     
 
 
         <div style="height: 18px;"></div>
-        <el-row justify="center">
-          <el-button type="primary" @click="restarttrajVideos" class="custom-button">Restart Videos</el-button>
+        <el-row justify="center" style="margin-bottom: 18px;">
+          <el-col :xs="22" :sm="20" :md="18" :lg="16" :xl="12">
+            <div style="display:flex;align-items:center;justify-content:center;column-gap:56px;row-gap:18px;flex-wrap:wrap;">
+              <span style="width:190px;font-family:'BoldFont','DemiFont','Arial',sans-serif;font-size:16px;white-space:nowrap;color:#333;text-align:right;">
+                Playback Speed: {{ trajPlaybackRate }}x
+              </span>
+              <div style="width:360px;max-width:100%;">
+                <el-slider
+                  v-model="trajPlaybackRate"
+                  :min="0.5"
+                  :max="2"
+                  :step="0.25"
+                  :marks="trajPlaybackMarks"
+                  :format-tooltip="formatTrajPlaybackTooltip"
+                />
+              </div>
+              <el-button type="primary" @click="restarttrajVideos" class="custom-button">Restart Videos</el-button>
+            </div>
+          </el-col>
         </el-row>
         
       </el-col>
