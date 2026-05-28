@@ -26,14 +26,14 @@ export default {
 }
 
 html {
-  background: #fbfbf8;
+  background: #f8fbff;
 }
 
 body {
   min-width: 320px;
   margin: 0;
-  color: #17201f;
-  background: #fbfbf8;
+  color: #142033;
+  background: #f8fbff;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -130,12 +130,12 @@ blockquote > p {
 }
 
 a {
-  color: #1f6f95;
+  color: #2f7fb8;
   text-decoration: none;
 }
 
 a:hover {
-  color: #14544e;
+  color: #1f5f8f;
   border-bottom: 1px dotted currentColor;
 }
 
