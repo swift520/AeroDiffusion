@@ -6,6 +6,7 @@ const baseUrl = import.meta.env.BASE_URL || '/'
 const publicAsset = (path) => `${baseUrl.replace(/\/?$/, '/')}${path.replace(/^\/+/, '')}`
 
 const trajPlaybackRate = ref(1)
+const comparisonPlaybackRate = ref(1)
 const trajPlaybackMarks = {
   0.5: '0.5x',
   1: '1x',
@@ -101,6 +102,13 @@ function setTrajVideoPlaybackRate() {
   })
 }
 
+function setComparisonVideoPlaybackRate() {
+  const comparisonVideos = document.querySelectorAll("video[data-key^='allalg']")
+  comparisonVideos.forEach((video) => {
+    video.playbackRate = comparisonPlaybackRate.value
+  })
+}
+
 function formatTrajPlaybackTooltip(value) {
   return `${value}x`
 }
@@ -125,8 +133,13 @@ watch(trajPlaybackRate, () => {
   nextTick(setTrajVideoPlaybackRate)
 })
 
+watch(comparisonPlaybackRate, () => {
+  nextTick(setComparisonVideoPlaybackRate)
+})
+
 onMounted(() => {
   setTrajVideoPlaybackRate()
+  setComparisonVideoPlaybackRate()
 })
 
 function restarttrajVideos() {
@@ -134,7 +147,7 @@ function restarttrajVideos() {
 }
 
 function restartAllAlgVideos() {
-  restartVideos("video[data-key^='allalg']")
+  restartVideos("video[data-key^='allalg']", comparisonPlaybackRate.value)
 }
 
 function restartCatchVideos() {
@@ -267,7 +280,18 @@ function restartRealWorldDynamicVideos() {
           </figure>
         </div>
 
-        <div class="control-panel">
+        <div class="control-panel control-panel--speed">
+          <span class="speed-label">Playback Speed: {{ comparisonPlaybackRate }}x</span>
+          <div class="speed-slider">
+            <el-slider
+              v-model="comparisonPlaybackRate"
+              :min="0.5"
+              :max="2"
+              :step="0.1"
+              :marks="trajPlaybackMarks"
+              :format-tooltip="formatTrajPlaybackTooltip"
+            />
+          </div>
           <el-button
             type="primary"
             :icon="RefreshRight"
