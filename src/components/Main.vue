@@ -256,6 +256,14 @@ function restartRealWorldDynamicVideos() {
           This section compares the proposed method against several state-of-the-art UAV obstacle avoidance algorithms under varying obstacle densities. Three scenarios with increasing numbers of obstacles are evaluated to assess scalability and robustness. In all settings, the maximum velocity of dynamic obstacles is set to 1.5 m/s.
         </p>
 
+        <div class="comparison-label">
+          <img
+            :src="publicAsset('video/allalg/label.png')"
+            alt="Algorithm comparison labels"
+            class="comparison-label-image"
+          >
+        </div>
+
         <div class="video-grid video-grid--three">
           <figure
             v-for="video in comparisonVideos"
@@ -595,6 +603,22 @@ function restartRealWorldDynamicVideos() {
 .video-grid--tracking {
   max-width: 1040px;
   margin: 0 auto;
+}
+
+.comparison-label {
+  width: min(100%, 600px);
+  margin: 0 auto 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 8px 22px rgba(31, 95, 143, 0.07);
+}
+
+.comparison-label-image {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .media-card {
